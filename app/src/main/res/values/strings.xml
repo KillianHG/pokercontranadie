@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">PokerContraNadie</string>
-    <string name="action_settings">Settings</string>
+    <string name="new_game">New Game</string>
     <string name="title_activity_playing">playing</string>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".playingFragment"
+    tools:context=".PlayingFragment"
     tools:showIn="@layout/activity_playing">
 
     <ImageView
@@ -90,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="eL5u3xSol8j4"
+        android:text="eEeEeEeEeEeE"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
