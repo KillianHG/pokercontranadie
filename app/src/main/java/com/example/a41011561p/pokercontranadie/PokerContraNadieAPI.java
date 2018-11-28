@@ -1,10 +1,12 @@
 package com.example.a41011561p.pokercontranadie;
 
 import android.net.Uri;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,17 +20,21 @@ public class PokerContraNadieAPI {
                 .buildUpon()
                 .appendPath("new")
                 .appendPath("shuffle")
-                .appendPath("?deck_count=1")
+                .appendPath("")
+                .appendQueryParameter("deck_count", "1")
                 .build();
         String url = builtUri.toString();
 
-        return processID(url);
+        Log.d("DEBUG", url != null ? url: null);
+
+
+        return doCallID(url);
     }
 
-    private ArrayList<Card> doCall(String url){
+    private String doCallID(String url){
         try {
             String JsonResponse = HttpUtils.get(url);
-            return processJson(JsonResponse);
+            return processID(JsonResponse);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,12 +46,10 @@ public class PokerContraNadieAPI {
         String id = "";
         try {
             JSONObject data = new JSONObject(jsonResponse);
-            JSONArray jsonCards = data.getJSONArray("cards");
-            for (int i = 0; i < jsonCards.length(); i++) {
-                JSONObject jsonCard = jsonCards.getJSONObject(i);
 
-                id = jsonCard.getString("deck_id");
-            }
+            id = data.getString("deck_id");
+
+            Log.d("ID", id != null ? id: null);
         } catch (JSONException e) {
             e.printStackTrace();
         }
