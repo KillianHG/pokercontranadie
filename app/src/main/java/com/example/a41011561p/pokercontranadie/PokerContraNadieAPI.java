@@ -31,10 +31,34 @@ public class PokerContraNadieAPI {
         return doCallID(url);
     }
 
+    ArrayList<Card> pickCards(String deckId, int pickedCards) {
+        Uri builtUri = Uri.parse(BASE_URL)
+                .buildUpon()
+                .appendPath(deckId)
+                .appendPath("draw")
+                .appendPath("")
+                .appendQueryParameter("count", Integer.toString(pickedCards))
+                .build();
+        String url = builtUri.toString();
+        Log.d("DEBUG", url != null ? url: null);
+
+        return doCall(url);
+    }
+
     private String doCallID(String url){
         try {
             String JsonResponse = HttpUtils.get(url);
             return processID(JsonResponse);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private ArrayList<Card> doCall(String url){
+        try {
+            String JsonResponse = HttpUtils.get(url);
+            return processJson(JsonResponse);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -66,13 +90,12 @@ public class PokerContraNadieAPI {
             for (int i = 0; i < jsonCards.length(); i++) {
                 JSONObject jsonCard = jsonCards.getJSONObject(i);
 
-                /*Cartas carta = new Cartas();
-                carta.setName(jsonCard.getString("name"));
-                carta.setColors(jsonCard.getString("colors"));
-                carta.setRarity(jsonCard.getString("rarity"));
-                carta.setImageUrl(jsonCard.getString("imageUrl"));
-                carta.setMultiverseid(jsonCard.getInt("multiverseid"));
-                cartas.add(carta);*/
+                Card card = new Card();
+                card.setSuit(jsonCard.getString("suit"));
+                card.setValue(jsonCard.getString("value"));
+                card.setCode(jsonCard.getString("code"));
+                card.setImage(jsonCard.getString("image"));
+                cards.add(card);
             }
         } catch (JSONException e) {
             e.printStackTrace();
