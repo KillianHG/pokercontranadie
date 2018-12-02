@@ -90,7 +90,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="eEeEeEeEeEeE"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -103,12 +102,12 @@
         app:layout_constraintGuide_percent="0.75" />
 
     <Button
-        android:id="@+id/hide_show"
+        android:id="@+id/hideShow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:text="SHOW"
+        android:text="HIDE"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -124,7 +123,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <Switch
-        android:id="@+id/switch7"
+        android:id="@+id/switch3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
