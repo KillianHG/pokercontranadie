@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class Card implements Serializable {
 
-    private String value;
+    private int value;
     private String suit;
     private String code;
     private String image;
 
-    public String getValue() {
+    public int getValue() {
         return value;
     }
 
@@ -25,7 +25,7 @@ public class Card implements Serializable {
         return image;
     }
 
-    public void setValue(String value) {
+    public void setValue(int value) {
         this.value = value;
     }
 

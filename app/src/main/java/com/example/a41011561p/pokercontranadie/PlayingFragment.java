@@ -1,5 +1,6 @@
 package com.example.a41011561p.pokercontranadie;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -25,6 +26,7 @@ public class PlayingFragment extends Fragment {
 
     private View view;
     private TextView deckid;
+    private TextView score;
     private String id = "";
     private ImageView card1;
     private ImageView card2;
@@ -39,7 +41,8 @@ public class PlayingFragment extends Fragment {
     private Button pickCards;
     private Button hideShow;
     private Button mulligan;
-    private Card[] hand;
+    private Button exit;
+    private Hand hand;
     private boolean cardsShowed;
     int nCardsMulligan;
     ArrayList<String> cardsToMulligan;
@@ -54,6 +57,10 @@ public class PlayingFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_playing, container, false);
 
         deckid = view.findViewById(R.id.deckId);
+        score = view.findViewById(R.id.score);
+        score.setVisibility(View.GONE);
+        exit = view.findViewById(R.id.exit);
+        exit.setVisibility(View.GONE);
         card1 = view.findViewById(R.id.card1);
         card2 = view.findViewById(R.id.card2);
         card3 = view.findViewById(R.id.card3);
@@ -68,9 +75,18 @@ public class PlayingFragment extends Fragment {
             public void onClick(View view) {
                 switch (view.getId()) {
                     case R.id.pickCards:
-                        hand = new Card[5];
-                        NewHandDataTask nhTask = new NewHandDataTask();
-                        nhTask.execute();
+                        if (!didMulligan) {
+                            hand = new Hand();
+                            NewHandDataTask nhTask = new NewHandDataTask();
+                            nhTask.execute();
+                        } else {
+                            showCards();
+                            hideShow.setVisibility(View.GONE);
+                            pickCards.setVisibility(View.GONE);
+                            score.setText("EXAMPLE SCORE");
+                            score.setVisibility(View.VISIBLE);
+                            exit.setVisibility(View.VISIBLE);
+                        }
                         break;
                     case R.id.hideShow:
                         if (cardsShowed) {
@@ -87,7 +103,7 @@ public class PlayingFragment extends Fragment {
                         cardsToMulligan = new ArrayList<>();
                         if (switch1.isChecked()) {
                             cardsToMulligan.add("0");
-                           nCardsMulligan++;
+                            nCardsMulligan++;
                         }
                         if (switch2.isChecked()) {
                             cardsToMulligan.add("1");
@@ -114,6 +130,12 @@ public class PlayingFragment extends Fragment {
                         switch3.setVisibility(View.GONE);
                         switch4.setVisibility(View.GONE);
                         switch5.setVisibility(View.GONE);
+                        pickCards.setVisibility(View.VISIBLE);
+                        pickCards.setText("END");
+                        break;
+                    case R.id.exit:
+                        Intent i = new Intent(getContext(), MainActivity.class);
+                        startActivity(i);
                         break;
                 }
             }
@@ -122,6 +144,7 @@ public class PlayingFragment extends Fragment {
         pickCards.setOnClickListener(listener);
         hideShow.setOnClickListener(listener);
         mulligan.setOnClickListener(listener);
+        exit.setOnClickListener(listener);
 
         return view;
     }
@@ -154,19 +177,19 @@ public class PlayingFragment extends Fragment {
 
     public void showCards() {
         Glide.with(getContext())
-                .load(hand[0].getImage()
+                .load(hand.getHand()[0].getImage()
                 ).into(card1);
         Glide.with(getContext())
-                .load(hand[1].getImage()
+                .load(hand.getHand()[1].getImage()
                 ).into(card2);
         Glide.with(getContext())
-                .load(hand[2].getImage()
+                .load(hand.getHand()[2].getImage()
                 ).into(card3);
         Glide.with(getContext())
-                .load(hand[3].getImage()
+                .load(hand.getHand()[3].getImage()
                 ).into(card4);
         Glide.with(getContext())
-                .load(hand[4].getImage()
+                .load(hand.getHand()[4].getImage()
                 ).into(card5);
         cardsShowed = true;
     }
@@ -188,6 +211,29 @@ public class PlayingFragment extends Fragment {
                 .load(backCardUrl
                 ).into(card5);
         cardsShowed = false;
+    }
+
+    public void getScore(Hand hand) {
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = i+1; j < 5; j++) {
+                if (hand.getHand()[i].getValue() > hand.getHand()[j].getValue()) {
+
+                }
+            }
+        }
+        
+        /*int compareTo (Hand that) {
+            for (int x=0; x<6; x++) //cycle through values
+            {
+                if (this.value[x]>that.value[x])
+                    return 1;
+                else if (this.value[x]<that.value[x])
+                    return -1;
+            }
+            return 0; //if hands are equal
+        }*/
+
     }
 
     private class NewGameDataTask extends AsyncTask<Void, Void, String> {
@@ -220,8 +266,8 @@ public class PlayingFragment extends Fragment {
 
         @Override
         protected void onPostExecute(ArrayList<Card> cards) {
-            for (int i = 0; i < hand.length; i++) {
-                hand[i] = cards.get(i);
+            for (int i = 0; i < 5; i++) {
+                hand.getHand()[i] = cards.get(i);
             }
             showCards();
             pickCards.setVisibility(View.GONE);
@@ -250,13 +296,9 @@ public class PlayingFragment extends Fragment {
         protected void onPostExecute(ArrayList<Card> card) {
             Log.d("DEBUG", card != null ? card.toString() : null);
             for (int i = 0; i < cardsToMulligan.size(); i++) {
-                hand[Integer.parseInt(cardsToMulligan.get(i))] = card.get(i);
+                hand.getHand()[Integer.parseInt(cardsToMulligan.get(i))] = card.get(i);
             }
             showCards();
         }
     }
-
-
-
-
 }

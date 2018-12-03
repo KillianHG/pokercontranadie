@@ -92,7 +92,17 @@ public class PokerContraNadieAPI {
 
                 Card card = new Card();
                 card.setSuit(jsonCard.getString("suit"));
-                card.setValue(jsonCard.getString("value"));
+                if (jsonCard.getString("value").equals("ACE")) {
+                    card.setValue(14);
+                } else if (jsonCard.getString("value").equals("KING")) {
+                    card.setValue(13);
+                } else if (jsonCard.getString("value").equals("QUEEN")) {
+                    card.setValue(12);
+                } else if (jsonCard.getString("value").equals("JACK")) {
+                    card.setValue(11);
+                } else {
+                    card.setValue(Integer.parseInt(jsonCard.getString("value")));
+                }
                 card.setCode(jsonCard.getString("code"));
                 card.setImage(jsonCard.getString("image"));
                 cards.add(card);
