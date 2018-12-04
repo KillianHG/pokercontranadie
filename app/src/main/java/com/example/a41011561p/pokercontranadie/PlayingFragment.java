@@ -132,6 +132,7 @@ public class PlayingFragment extends Fragment {
                         switch5.setVisibility(View.GONE);
                         pickCards.setVisibility(View.VISIBLE);
                         pickCards.setText("END");
+
                         break;
                     case R.id.exit:
                         Intent i = new Intent(getContext(), MainActivity.class);
@@ -296,6 +297,7 @@ public class PlayingFragment extends Fragment {
         protected void onPostExecute(ArrayList<Card> card) {
             Log.d("DEBUG", card != null ? card.toString() : null);
             for (int i = 0; i < cardsToMulligan.size(); i++) {
+                hand.getDiscards().add(hand.getHand()[Integer.parseInt(cardsToMulligan.get(i))]);
                 hand.getHand()[Integer.parseInt(cardsToMulligan.get(i))] = card.get(i);
             }
             showCards();

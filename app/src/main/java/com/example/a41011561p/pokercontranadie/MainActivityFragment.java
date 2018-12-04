@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class MainActivityFragment extends Fragment {
 
     public Button play;
+    public Button history;
 
     public MainActivityFragment() {
     }
@@ -26,6 +27,7 @@ public class MainActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         play = view.findViewById(R.id.play);
+        history = view.findViewById(R.id.history);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -35,11 +37,16 @@ public class MainActivityFragment extends Fragment {
                         Intent i = new Intent(getContext(), Playing.class);
                         startActivity(i);
                         break;
+                    case R.id.history:
+                        Intent ii = new Intent(getContext(), History.class);
+                        startActivity(ii);
+                        break;
                 }
             }
         };
 
         play.setOnClickListener(listener);
+        history.setOnClickListener(listener);
 
         return view;
     }
