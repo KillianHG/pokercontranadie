@@ -46,6 +46,7 @@ public class HistoryFragment extends Fragment {
         adapter = new ArrayAdapter<>(
                 getContext(),
                 R.layout.lv_history_row,
+                R.id.gameScore,
                 items
         );
         lvHistory.setAdapter(adapter);
