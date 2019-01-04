@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.a41011561p.pokercontranadie.databinding.FragmentMainBinding;
+
 import java.util.ArrayList;
 
 /**
@@ -15,8 +17,7 @@ import java.util.ArrayList;
  */
 public class MainActivityFragment extends Fragment {
 
-    public Button play;
-    public Button history;
+    private FragmentMainBinding binding;
 
     public MainActivityFragment() {
     }
@@ -24,10 +25,8 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-
-        play = view.findViewById(R.id.play);
-        history = view.findViewById(R.id.history);
+        binding = FragmentMainBinding.inflate(inflater);
+        View view = binding.getRoot();
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -45,8 +44,8 @@ public class MainActivityFragment extends Fragment {
             }
         };
 
-        play.setOnClickListener(listener);
-        history.setOnClickListener(listener);
+        binding.play.setOnClickListener(listener);
+        binding.history.setOnClickListener(listener);
 
         return view;
     }

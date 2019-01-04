@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.bumptech.glide.Glide;
+import com.example.a41011561p.pokercontranadie.databinding.FragmentPlayingBinding;
 
 import java.util.ArrayList;
 
@@ -25,23 +26,8 @@ public class PlayingFragment extends Fragment {
     String backCardUrl = "https://opengameart.org/sites/default/files/card%20back%20red.png";
 
     private View view;
-    private TextView deckid;
-    private TextView score;
     private String id = "";
-    private ImageView card1;
-    private ImageView card2;
-    private ImageView card3;
-    private ImageView card4;
-    private ImageView card5;
-    private Switch switch1;
-    private Switch switch2;
-    private Switch switch3;
-    private Switch switch4;
-    private Switch switch5;
-    private Button pickCards;
-    private Button hideShow;
-    private Button mulligan;
-    private Button exit;
+    private FragmentPlayingBinding binding;
     private Hand hand;
     private boolean cardsShowed;
     int nCardsMulligan;
@@ -54,21 +40,12 @@ public class PlayingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_playing, container, false);
+        binding = FragmentPlayingBinding.inflate(inflater);
+        view = binding.getRoot();
 
-        deckid = view.findViewById(R.id.deckId);
-        score = view.findViewById(R.id.score);
-        score.setVisibility(View.GONE);
-        exit = view.findViewById(R.id.exit);
-        exit.setVisibility(View.GONE);
-        card1 = view.findViewById(R.id.card1);
-        card2 = view.findViewById(R.id.card2);
-        card3 = view.findViewById(R.id.card3);
-        card4 = view.findViewById(R.id.card4);
-        card5 = view.findViewById(R.id.card5);
-        pickCards = view.findViewById(R.id.pickCards);
-        hideShow = view.findViewById(R.id.hideShow);
-        mulligan = view.findViewById(R.id.mulligan);
+
+        binding.score.setVisibility(View.GONE);
+        binding.exit.setVisibility(View.GONE);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -81,57 +58,57 @@ public class PlayingFragment extends Fragment {
                             nhTask.execute();
                         } else {
                             showCards();
-                            hideShow.setVisibility(View.GONE);
-                            pickCards.setVisibility(View.GONE);
-                            score.setText("EXAMPLE SCORE");
-                            score.setVisibility(View.VISIBLE);
-                            exit.setVisibility(View.VISIBLE);
+                            binding.hideShow.setVisibility(View.GONE);
+                            binding.pickCards.setVisibility(View.GONE);
+                            binding.score.setText("EXAMPLE SCORE");
+                            binding.score.setVisibility(View.VISIBLE);
+                            binding.exit.setVisibility(View.VISIBLE);
                         }
                         break;
                     case R.id.hideShow:
                         if (cardsShowed) {
-                            hideShow.setText("HIDE");
+                            binding.hideShow.setText("HIDE");
                             showBackCards();
                             cardsShowed = false;
                         } else {
-                            hideShow.setText("SHOW");
+                            binding.hideShow.setText("SHOW");
                             showCards();
                             cardsShowed = true;
                         }
                         break;
                     case R.id.mulligan:
                         cardsToMulligan = new ArrayList<>();
-                        if (switch1.isChecked()) {
+                        if (binding.switch1.isChecked()) {
                             cardsToMulligan.add("0");
                             nCardsMulligan++;
                         }
-                        if (switch2.isChecked()) {
+                        if (binding.switch2.isChecked()) {
                             cardsToMulligan.add("1");
                             nCardsMulligan++;
                         }
-                        if (switch3.isChecked()) {
+                        if (binding.switch3.isChecked()) {
                             cardsToMulligan.add("2");
                             nCardsMulligan++;
                         }
-                        if (switch4.isChecked()) {
+                        if (binding.switch4.isChecked()) {
                             cardsToMulligan.add("3");
                             nCardsMulligan++;
                         }
-                        if (switch5.isChecked()) {
+                        if (binding.switch5.isChecked()) {
                             cardsToMulligan.add("4");
                             nCardsMulligan++;
                         }
                         MulliganDataTask mTask = new MulliganDataTask();
                         mTask.execute();
                         didMulligan = true;
-                        mulligan.setVisibility(View.GONE);
-                        switch1.setVisibility(View.GONE);
-                        switch2.setVisibility(View.GONE);
-                        switch3.setVisibility(View.GONE);
-                        switch4.setVisibility(View.GONE);
-                        switch5.setVisibility(View.GONE);
-                        pickCards.setVisibility(View.VISIBLE);
-                        pickCards.setText("END");
+                        binding.mulligan.setVisibility(View.GONE);
+                        binding.switch1.setVisibility(View.GONE);
+                        binding.switch2.setVisibility(View.GONE);
+                        binding.switch3.setVisibility(View.GONE);
+                        binding.switch4.setVisibility(View.GONE);
+                        binding.switch5.setVisibility(View.GONE);
+                        binding.pickCards.setVisibility(View.VISIBLE);
+                        binding.pickCards.setText("END");
 
                         break;
                     case R.id.exit:
@@ -142,10 +119,10 @@ public class PlayingFragment extends Fragment {
             }
         };
 
-        pickCards.setOnClickListener(listener);
-        hideShow.setOnClickListener(listener);
-        mulligan.setOnClickListener(listener);
-        exit.setOnClickListener(listener);
+        binding.pickCards.setOnClickListener(listener);
+        binding.hideShow.setOnClickListener(listener);
+        binding.mulligan.setOnClickListener(listener);
+        binding.exit.setOnClickListener(listener);
 
         return view;
     }
@@ -153,64 +130,55 @@ public class PlayingFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        deckid = view.findViewById(R.id.deckId);
 
         NewGameDataTask ngTask = new NewGameDataTask();
         ngTask.execute();
         showBackCards();
 
-        hideShow = view.findViewById(R.id.hideShow);
-        mulligan = view.findViewById(R.id.mulligan);
-        switch1 = view.findViewById(R.id.switch1);
-        switch2 = view.findViewById(R.id.switch2);
-        switch3 = view.findViewById(R.id.switch3);
-        switch4 = view.findViewById(R.id.switch4);
-        switch5 = view.findViewById(R.id.switch5);
-
-        hideShow.setVisibility(View.INVISIBLE);
-        mulligan.setVisibility(View.INVISIBLE);
-        switch1.setVisibility(View.INVISIBLE);
-        switch2.setVisibility(View.INVISIBLE);
-        switch3.setVisibility(View.INVISIBLE);
-        switch4.setVisibility(View.INVISIBLE);
-        switch5.setVisibility(View.INVISIBLE);
+        binding.hideShow.setVisibility(View.INVISIBLE);
+        binding.mulligan.setVisibility(View.INVISIBLE);
+        binding.switch1.setVisibility(View.INVISIBLE);
+        binding.switch2.setVisibility(View.INVISIBLE);
+        binding.switch3.setVisibility(View.INVISIBLE);
+        binding.switch4.setVisibility(View.INVISIBLE);
+        binding.switch5.setVisibility(View.INVISIBLE);
     }
 
     public void showCards() {
         Glide.with(getContext())
                 .load(hand.getHand()[0].getImage()
-                ).into(card1);
+                ).into(binding.card1);
         Glide.with(getContext())
                 .load(hand.getHand()[1].getImage()
-                ).into(card2);
+                ).into(binding.card2);
         Glide.with(getContext())
                 .load(hand.getHand()[2].getImage()
-                ).into(card3);
+                ).into(binding.card3);
         Glide.with(getContext())
                 .load(hand.getHand()[3].getImage()
-                ).into(card4);
+                ).into(binding.card4);
         Glide.with(getContext())
                 .load(hand.getHand()[4].getImage()
-                ).into(card5);
+                ).into(binding.card5);
         cardsShowed = true;
     }
 
     public void showBackCards() {
         Glide.with(getContext())
                 .load(backCardUrl
-                ).into(card1);
+                ).into(binding.card1);
         Glide.with(getContext())
                 .load(backCardUrl
-                ).into(card2);
+                ).into(binding.card2);
         Glide.with(getContext())
                 .load(backCardUrl
-                ).into(card3);
+                ).into(binding.card3);
         Glide.with(getContext())
                 .load(backCardUrl
-                ).into(card4);
+                ).into(binding.card4);
         Glide.with(getContext())
                 .load(backCardUrl
-                ).into(card5);
+                ).into(binding.card5);
         cardsShowed = false;
     }
 
@@ -250,7 +218,7 @@ public class PlayingFragment extends Fragment {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             id = result;
-            deckid.setText("GAME ID: " + id);
+            binding.deckId.setText("GAME ID: " + id);
         }
     }
 
@@ -271,14 +239,14 @@ public class PlayingFragment extends Fragment {
                 hand.getHand()[i] = cards.get(i);
             }
             showCards();
-            pickCards.setVisibility(View.GONE);
-            hideShow.setVisibility(View.VISIBLE);
-            mulligan.setVisibility(View.VISIBLE);
-            switch1.setVisibility(View.VISIBLE);
-            switch2.setVisibility(View.VISIBLE);
-            switch3.setVisibility(View.VISIBLE);
-            switch4.setVisibility(View.VISIBLE);
-            switch5.setVisibility(View.VISIBLE);
+            binding.pickCards.setVisibility(View.GONE);
+            binding.hideShow.setVisibility(View.VISIBLE);
+            binding.mulligan.setVisibility(View.VISIBLE);
+            binding.switch1.setVisibility(View.VISIBLE);
+            binding.switch2.setVisibility(View.VISIBLE);
+            binding.switch3.setVisibility(View.VISIBLE);
+            binding.switch4.setVisibility(View.VISIBLE);
+            binding.switch5.setVisibility(View.VISIBLE);
         }
     }
 

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.a41011561p.pokercontranadie.databinding.FragmentHistoryBinding;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +22,7 @@ public class HistoryFragment extends Fragment {
     private ArrayList<String> items;
     //private HandAdapter adapter;
     private ArrayAdapter<String> adapter;
+    private FragmentHistoryBinding binding;
 
     public HistoryFragment() {
     }
@@ -27,9 +30,8 @@ public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_history, container, false);
-
-        ListView lvHistory = view.findViewById(R.id.lvHistory);
+        binding = FragmentHistoryBinding.inflate(inflater);
+        View view = binding.getRoot();
 
         String[] data = {
                 "1",
@@ -49,7 +51,7 @@ public class HistoryFragment extends Fragment {
                 R.id.gameScore,
                 items
         );
-        lvHistory.setAdapter(adapter);
+        binding.lvHistory.setAdapter(adapter);
 
         return view;
     }
