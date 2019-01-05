@@ -1,6 +1,7 @@
 package com.example.a41011561p.pokercontranadie;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.a41011561p.pokercontranadie.databinding.LvHistoryRowBinding;
 
 import java.util.List;
 
@@ -25,21 +27,22 @@ public class HandAdapter extends ArrayAdapter<Hand> {
 
         // Obtenim l'objecte en la possició corresponent
         Hand hand = getItem(position);
+        Log.w("XXXX", hand.toString());
+
+        LvHistoryRowBinding binding = null;
 
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.lv_history_row, parent, false);
+            binding = DataBindingUtil.inflate(inflater, R.layout.lv_history_row, parent, false);
+        } else {
+            binding = DataBindingUtil.getBinding(convertView);
+
         }
-
-        // Unim el codi en les Views del Layout
-        TextView gameScore = convertView.findViewById(R.id.gameScore);
-
-
         // Fiquem les dades dels objectes (provinents del JSON) en el layout
-        gameScore.setText("PARTIDA Nº: " +position);
+        binding.gameScore.setText("PARTIDA Nº: " +position);
 
         // Retornem la View replena per a mostrarla
-        return convertView;
+        return binding.getRoot();
     }
 
 }

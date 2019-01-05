@@ -1,5 +1,7 @@
 package com.example.a41011561p.pokercontranadie;
 
+import android.arch.lifecycle.Observer;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,21 +9,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.arch.lifecycle.ViewModelProviders;
 
 import com.example.a41011561p.pokercontranadie.databinding.FragmentHistoryBinding;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class HistoryFragment extends Fragment {
 
-    private ArrayList<String> items;
-    //private HandAdapter adapter;
-    private ArrayAdapter<String> adapter;
+    private ArrayList<Hand> items;
+    private HandAdapter adapter;
+
+    private HandViewModel model;
     private FragmentHistoryBinding binding;
 
     public HistoryFragment() {
@@ -33,26 +38,20 @@ public class HistoryFragment extends Fragment {
         binding = FragmentHistoryBinding.inflate(inflater);
         View view = binding.getRoot();
 
-        String[] data = {
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "7",
-                "8"
-        };
-
-        items = new ArrayList<>(Arrays.asList(data));
-
-        adapter = new ArrayAdapter<>(
+        items = new ArrayList<>();
+        adapter = new HandAdapter(
                 getContext(),
                 R.layout.lv_history_row,
-                R.id.gameScore,
                 items
         );
         binding.lvHistory.setAdapter(adapter);
-
+        model = ViewModelProviders.of(this).get(HandViewModel.class);
+        model.getHistory().observe(this, new Observer<List<HistoryDB>>() {
+            @Override
+            public void onChanged(@Nullable List<HistoryDB> historyDBS) {
+                //adapter.addAll(historyDBS);
+            }
+        });
         return view;
     }
 }
