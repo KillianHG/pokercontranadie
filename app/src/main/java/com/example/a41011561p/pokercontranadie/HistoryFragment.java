@@ -1,12 +1,14 @@
 package com.example.a41011561p.pokercontranadie;
 
 import android.arch.lifecycle.Observer;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.arch.lifecycle.ViewModelProviders;
@@ -45,6 +47,19 @@ public class HistoryFragment extends Fragment {
                 items
         );
         binding.lvHistory.setAdapter(adapter);
+
+        binding.lvHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                HistoryDB hand = (HistoryDB) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(getContext(), DetailsActivity.class);
+                intent.putExtra("hand", hand);
+
+                startActivity(intent);
+            }
+        });
+
+
         model = ViewModelProviders.of(this).get(HandViewModel.class);
         model.getHistory().observe(this, new Observer<List<HistoryDB>>() {
             @Override

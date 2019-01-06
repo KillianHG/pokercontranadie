@@ -39,7 +39,7 @@ public class HandAdapter extends ArrayAdapter<HistoryDB> {
 
         }
         // Fiquem les dades dels objectes (provinents del JSON) en el layout
-        binding.gameScore.setText("PARTIDA Nº: " +position);
+        binding.gameScore.setText("SCORE: " +hand.getScore()+ "  ID: "+hand.getId());
 
         // Retornem la View replena per a mostrarla
         return binding.getRoot();

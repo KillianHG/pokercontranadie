@@ -119,7 +119,7 @@ public class PlayingFragment extends Fragment {
                         history.setCard3(hand.getHand()[2].getImage());
                         history.setCard4(hand.getHand()[3].getImage());
                         history.setCard5(hand.getHand()[4].getImage());
-                        history.setScore(7);
+                        history.setScore(hand.getHand()[0].getValue());
 
                         model.addHand(history);
 
