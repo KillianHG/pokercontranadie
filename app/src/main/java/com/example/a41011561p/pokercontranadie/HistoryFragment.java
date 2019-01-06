@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class HistoryFragment extends Fragment {
 
-    private ArrayList<Hand> items;
+    private ArrayList<HistoryDB> items;
     private HandAdapter adapter;
 
     private HandViewModel model;
@@ -49,7 +49,7 @@ public class HistoryFragment extends Fragment {
         model.getHistory().observe(this, new Observer<List<HistoryDB>>() {
             @Override
             public void onChanged(@Nullable List<HistoryDB> historyDBS) {
-                //adapter.addAll(historyDBS);
+                adapter.addAll(historyDBS);
             }
         });
         return view;

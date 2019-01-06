@@ -16,9 +16,9 @@ import com.example.a41011561p.pokercontranadie.databinding.LvHistoryRowBinding;
 import java.util.List;
 
 
-public class HandAdapter extends ArrayAdapter<Hand> {
+public class HandAdapter extends ArrayAdapter<HistoryDB> {
 
-    public HandAdapter(Context context, int resource, List<Hand> objects) {
+    public HandAdapter(Context context, int resource, List<HistoryDB> objects) {
         super(context, resource, objects);
     }
 
@@ -26,7 +26,7 @@ public class HandAdapter extends ArrayAdapter<Hand> {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         // Obtenim l'objecte en la possició corresponent
-        Hand hand = getItem(position);
+        HistoryDB hand = getItem(position);
         Log.w("XXXX", hand.toString());
 
         LvHistoryRowBinding binding = null;

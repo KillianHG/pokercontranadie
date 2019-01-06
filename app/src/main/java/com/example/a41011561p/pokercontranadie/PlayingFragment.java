@@ -1,5 +1,6 @@
 package com.example.a41011561p.pokercontranadie;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -33,6 +34,8 @@ public class PlayingFragment extends Fragment {
     int nCardsMulligan;
     ArrayList<String> cardsToMulligan;
     private boolean didMulligan = false;
+    HistoryDB history = new HistoryDB();
+    private HandViewModel model;
 
     public PlayingFragment() {
     }
@@ -43,6 +46,7 @@ public class PlayingFragment extends Fragment {
         binding = FragmentPlayingBinding.inflate(inflater);
         view = binding.getRoot();
 
+        model = ViewModelProviders.of(this).get(HandViewModel.class);
 
         binding.score.setVisibility(View.GONE);
         binding.exit.setVisibility(View.GONE);
@@ -109,6 +113,15 @@ public class PlayingFragment extends Fragment {
                         binding.switch5.setVisibility(View.GONE);
                         binding.pickCards.setVisibility(View.VISIBLE);
                         binding.pickCards.setText("END");
+
+                        history.setCard1(hand.getHand()[0].getImage());
+                        history.setCard2(hand.getHand()[1].getImage());
+                        history.setCard3(hand.getHand()[2].getImage());
+                        history.setCard4(hand.getHand()[3].getImage());
+                        history.setCard5(hand.getHand()[4].getImage());
+                        history.setScore(7);
+
+                        model.addHand(history);
 
                         break;
                     case R.id.exit:

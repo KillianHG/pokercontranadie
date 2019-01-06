@@ -13,6 +13,7 @@ public class HistoryDB implements Serializable {
     private String card3;
     private String card4;
     private String card5;
+    private int score;
     private String discardList;
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -35,6 +36,10 @@ public class HistoryDB implements Serializable {
 
     public String getCard5() {
         return card5;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public String getDiscardList() {
@@ -63,6 +68,10 @@ public class HistoryDB implements Serializable {
 
     public void setCard5(String card5) {
         this.card5 = card5;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public void setDiscardList(String discardList) {
