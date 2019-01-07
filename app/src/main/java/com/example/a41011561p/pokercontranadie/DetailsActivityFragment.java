@@ -61,7 +61,32 @@ public class DetailsActivityFragment extends Fragment {
                 hand.getCard5()
         ).into(binding.card5);
 
+        String[] discards = hand.getDiscardList().split(" ");
+
+        if (discards.length>0) {
+            Glide.with(getContext()).load(
+                    discards[0]
+            ).into(binding.discard1);
+            if (discards.length>1) {
+                Glide.with(getContext()).load(
+                        discards[1]
+                ).into(binding.discard2);
+                if (discards.length>2) {
+                    Glide.with(getContext()).load(
+                            discards[2]
+                    ).into(binding.discard3);
+                    if (discards.length>3) {
+                        Glide.with(getContext()).load(
+                                discards[3]
+                        ).into(binding.discard4);
+                        if (discards.length>4) {
+                            Glide.with(getContext()).load(
+                                    discards[4]
+                            ).into(binding.discard5);
+                        }
+                    }
+                }
+            }
+        }
     }
-
-
 }

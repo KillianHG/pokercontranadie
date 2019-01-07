@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".DetailsActivityFragment"
@@ -10,8 +11,8 @@
 
         <ImageView
             android:id="@+id/card1"
-            android:layout_width="62dp"
-            android:layout_height="88dp"
+            android:layout_width="74dp"
+            android:layout_height="98dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:adjustViewBounds="true"
@@ -23,8 +24,8 @@
 
         <ImageView
             android:id="@+id/card2"
-            android:layout_width="62dp"
-            android:layout_height="88dp"
+            android:layout_width="74dp"
+            android:layout_height="98dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
@@ -37,8 +38,8 @@
 
         <ImageView
             android:id="@+id/card3"
-            android:layout_width="62dp"
-            android:layout_height="88dp"
+            android:layout_width="74dp"
+            android:layout_height="98dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:adjustViewBounds="true"
@@ -49,9 +50,10 @@
 
         <ImageView
             android:id="@+id/card4"
-            android:layout_width="62dp"
-            android:layout_height="88dp"
+            android:layout_width="74dp"
+            android:layout_height="98dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="24dp"
             android:adjustViewBounds="true"
@@ -60,13 +62,15 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toEndOf="@+id/card2"
             app:layout_constraintHorizontal_bias="0.537"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card1" />
 
         <ImageView
             android:id="@+id/card5"
-            android:layout_width="62dp"
-            android:layout_height="88dp"
+            android:layout_width="74dp"
+            android:layout_height="98dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="24dp"
             android:adjustViewBounds="true"
@@ -75,13 +79,103 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.462"
-            app:layout_constraintStart_toStartOf="@+id/card2" />
+            app:layout_constraintStart_toStartOf="@+id/card2"
+            app:layout_constraintTop_toBottomOf="@+id/card3" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.6" />
+
+        <TextView
+            android:id="@+id/tvDiscard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Discards"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+        <ImageView
+            android:id="@+id/discard1"
+            android:layout_width="62dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="160dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiscard" />
+
+        <ImageView
+            android:id="@+id/discard2"
+            android:layout_width="62dp"
+            android:layout_height="88dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="160dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/discard1"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiscard" />
+
+        <ImageView
+            android:id="@+id/discard3"
+            android:layout_width="62dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="160dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/discard1"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiscard" />
+
+        <ImageView
+            android:id="@+id/discard4"
+            android:layout_width="62dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="160dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/discard2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiscard" />
+
+        <ImageView
+            android:id="@+id/discard5"
+            android:layout_width="62dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="160dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/discard3"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiscard" />
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -114,15 +114,7 @@ public class PlayingFragment extends Fragment {
                         binding.pickCards.setVisibility(View.VISIBLE);
                         binding.pickCards.setText("END");
 
-                        history.setCard1(hand.getHand()[0].getImage());
-                        history.setCard2(hand.getHand()[1].getImage());
-                        history.setCard3(hand.getHand()[2].getImage());
-                        history.setCard4(hand.getHand()[3].getImage());
-                        history.setCard5(hand.getHand()[4].getImage());
-                        history.setScore(hand.getHand()[0].getValue());
-
                         model.addHand(history);
-
                         break;
                     case R.id.exit:
                         Intent i = new Intent(getContext(), MainActivity.class);
@@ -276,11 +268,22 @@ public class PlayingFragment extends Fragment {
 
         @Override
         protected void onPostExecute(ArrayList<Card> card) {
+            history.setDiscardList("");
             Log.d("DEBUG", card != null ? card.toString() : null);
             for (int i = 0; i < cardsToMulligan.size(); i++) {
                 hand.getDiscards().add(hand.getHand()[Integer.parseInt(cardsToMulligan.get(i))]);
                 hand.getHand()[Integer.parseInt(cardsToMulligan.get(i))] = card.get(i);
             }
+            history.setCard1(hand.getHand()[0].getImage());
+            history.setCard2(hand.getHand()[1].getImage());
+            history.setCard3(hand.getHand()[2].getImage());
+            history.setCard4(hand.getHand()[3].getImage());
+            history.setCard5(hand.getHand()[4].getImage());
+            history.setScore(hand.getHand()[0].getValue());
+            for (Card c:hand.getDiscards()) {
+                history.setDiscardList(history.getDiscardList()+c.getImage()+" ");
+            }
+            System.out.println(history.getDiscardList());
             showCards();
         }
     }
