@@ -1,6 +1,10 @@
 package com.example.a41011561p.pokercontranadie;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +42,15 @@ public class DetailsActivityFragment extends Fragment {
             }
         }
 
+        SharedViewModel sharedModel = ViewModelProviders.of(
+                getActivity()
+        ).get(SharedViewModel.class);
+        sharedModel.getSelected().observe(this, new Observer<HistoryDB>() {
+            @Override
+            public void onChanged(@Nullable HistoryDB hand) {
+                updateUi(hand);
+            }
+        });
 
         return view;
     }

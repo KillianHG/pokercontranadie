@@ -20,14 +20,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+import com.bumptech.glide.manager.Lifecycle;
+
+
 public class HistoryFragment extends Fragment {
 
     private ArrayList<HistoryDB> items;
     private HandAdapter adapter;
 
+    private SharedViewModel sharedModel;
     private HandViewModel model;
     private FragmentHistoryBinding binding;
 
@@ -46,16 +47,24 @@ public class HistoryFragment extends Fragment {
                 R.layout.lv_history_row,
                 items
         );
+
+        sharedModel = ViewModelProviders.of(getActivity()).get(SharedViewModel.class);
         binding.lvHistory.setAdapter(adapter);
+
 
         binding.lvHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 HistoryDB hand = (HistoryDB) adapterView.getItemAtPosition(i);
-                Intent intent = new Intent(getContext(), DetailsActivity.class);
-                intent.putExtra("hand", hand);
+                if (!esTablet()) {
+                    Intent intent = new Intent(getContext(), DetailsActivity.class);
+                    intent.putExtra("hand", hand);
 
-                startActivity(intent);
+                    startActivity(intent);
+                } else {
+                    sharedModel.select(hand);
+                }
+
             }
         });
 
@@ -68,5 +77,9 @@ public class HistoryFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    boolean esTablet() {
+        return getResources().getBoolean(R.bool.tablet);
     }
 }
