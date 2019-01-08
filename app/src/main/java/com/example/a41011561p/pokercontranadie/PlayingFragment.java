@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +44,7 @@ public class PlayingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         binding = FragmentPlayingBinding.inflate(inflater);
         view = binding.getRoot();
 
@@ -185,29 +187,6 @@ public class PlayingFragment extends Fragment {
                 .load(backCardUrl
                 ).into(binding.card5);
         cardsShowed = false;
-    }
-
-    public void getScore(Hand hand) {
-
-        for (int i = 0; i < 5; i++) {
-            for (int j = i+1; j < 5; j++) {
-                if (hand.getHand()[i].getValue() > hand.getHand()[j].getValue()) {
-
-                }
-            }
-        }
-        
-        /*int compareTo (Hand that) {
-            for (int x=0; x<6; x++) //cycle through values
-            {
-                if (this.value[x]>that.value[x])
-                    return 1;
-                else if (this.value[x]<that.value[x])
-                    return -1;
-            }
-            return 0; //if hands are equal
-        }*/
-
     }
 
     private class NewGameDataTask extends AsyncTask<Void, Void, String> {

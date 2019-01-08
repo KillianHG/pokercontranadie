@@ -14,39 +14,39 @@
             android:layout_width="74dp"
             android:layout_height="98dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
             android:maxHeight="160dp"
             android:scaleType="fitXY"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/Hand" />
 
         <ImageView
             android:id="@+id/card2"
             android:layout_width="74dp"
             android:layout_height="98dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:adjustViewBounds="true"
             android:maxHeight="160dp"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toStartOf="@+id/card3"
             app:layout_constraintStart_toEndOf="@+id/card1"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/Hand" />
 
         <ImageView
             android:id="@+id/card3"
             android:layout_width="74dp"
             android:layout_height="98dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:adjustViewBounds="true"
             android:maxHeight="160dp"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/Hand" />
 
         <ImageView
             android:id="@+id/card4"
@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:text="Discards"
             android:textSize="20sp"
@@ -107,7 +107,6 @@
             android:layout_width="62dp"
             android:layout_height="88dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
@@ -122,7 +121,6 @@
             android:id="@+id/discard2"
             android:layout_width="62dp"
             android:layout_height="88dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
@@ -137,7 +135,6 @@
             android:layout_width="62dp"
             android:layout_height="88dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
             android:maxHeight="160dp"
@@ -151,7 +148,6 @@
             android:layout_width="62dp"
             android:layout_height="88dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
@@ -167,7 +163,6 @@
             android:layout_width="62dp"
             android:layout_height="88dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:adjustViewBounds="true"
@@ -177,5 +172,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/discard3"
             app:layout_constraintTop_toBottomOf="@+id/tvDiscard" />
+
+        <TextView
+            android:id="@+id/Hand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Hand"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>
